@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.pandaism.sftaskflow.application.ExportController">
+    <padding>
+        <Insets top="10" left="10" right="10" bottom="10"/>
+    </padding>
+    <top>
+        <Label text="Please select an export channel to use"/>
+    </top>
+    <center>
+        <HBox alignment="CENTER" spacing="10">
+            <CheckBox fx:id="excelCheckBox" text="Excel"/>
+            <CheckBox fx:id="csvCheckBox" text="CSV"/>
+        </HBox>
+    </center>
+    <bottom>
+        <HBox alignment="CENTER">
+            <Button text="Export" onAction="#onExport"/>
+        </HBox>
+    </bottom>
+</BorderPane>

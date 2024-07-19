@@ -1,0 +1,61 @@
+plugins {
+  id 'java'
+  id 'application'
+  id 'org.javamodularity.moduleplugin' version '1.8.12'
+  id 'org.openjfx.javafxplugin' version '0.0.13'
+  id 'org.beryx.jlink' version '2.25.0'
+  id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group 'com.pandaism'
+version '2.5-TestBuild'
+
+repositories {
+  mavenCentral()
+}
+
+ext {
+  junitVersion = '5.10.0'
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+tasks.withType(JavaCompile) {
+  options.encoding = 'UTF-8'
+}
+
+application {
+  mainModule = 'com.pandaism.sftaskflow'
+  mainClass = 'com.pandaism.sftaskflow.SFTaskFlow'
+}
+
+javafx {
+  version = '17.0.6'
+  modules = ['javafx.controls', 'javafx.fxml']
+}
+
+dependencies {
+  implementation 'io.github.mkpaz:atlantafx-base:2.0.1'
+  implementation 'org.kordamp.ikonli:ikonli-swing:12.3.1'
+  implementation 'org.kordamp.ikonli:ikonli-material2-pack:12.3.1'
+  implementation 'com.microsoft.sqlserver:mssql-jdbc:7.4.1.jre11'
+  implementation 'org.apache.poi:poi:5.2.5'
+  implementation 'org.apache.poi:poi-ooxml:5.2.5'
+
+
+  testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
+test {
+  useJUnitPlatform()
+}
+
+shadowJar {
+  manifest {
+    attributes(
+            'Main-Class': application.mainClass
+    )
+  }
+}
